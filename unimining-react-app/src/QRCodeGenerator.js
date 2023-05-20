@@ -71,8 +71,8 @@ const QRCodeGenerator = () => {
         <div>
             
         <br />
-          <Form.Label style={{ float: 'left' }}>Link: {`http://192.168.100.11:3000/approve?wallet=${walletAddress}`}</Form.Label> <br />
-          <QRCode value={`http://192.168.100.11:3000/approve?wallet=${walletAddress}`} />
+          <Form.Label style={{ float: 'left' }}>Link: {`${window.location.origin}/approve?wallet=${walletAddress}`}</Form.Label> <br />
+          <QRCode value={`${window.location.origin}/approve?wallet=${walletAddress}`} />
         </div>
       )}
     </header>

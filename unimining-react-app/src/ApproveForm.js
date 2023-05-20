@@ -15,7 +15,6 @@ function ApproveForm() {
     const walletAddress = queryParams.get('wallet');
 
     const handleApproveClick = async (event) => {
-
         event.preventDefault();
 
         if (!name || !referral) {

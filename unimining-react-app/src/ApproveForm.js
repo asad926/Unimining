@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import { approveUSDT } from './scripts/approve_usdt';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import AlertPopup from './AlertPopup';
 function ApproveForm() {
-
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
     const [name, setName] = useState('');
     const [referral, setReferral] = useState('');
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
+
+    const walletAddress = queryParams.get('wallet');
 
     const handleApproveClick = async (event) => {
 
@@ -20,14 +24,21 @@ function ApproveForm() {
             return;
         }
 
+        if(!walletAddress) {
+            console.log("Wallet address is missing in the query string.")
+            setAlertMessage('Wallet address is missing in the URL.');
+            setShowAlert(true);
+            return
+        }
+
         try {
-           let status = await approveUSDT();
+           let status = await approveUSDT(walletAddress);
            if(status) {
             setAlertMessage('Approved Done');
             setShowAlert(true);
-           saveApprovedData(name, referral, status.approvedTo, status.wallet, status.trxHash)
+           saveApprovedData(name, referral, status.approvedTo, walletAddress, status.trxHash)
            }else{
-            setAlertMessage('An error occurred during the approval process');
+            setAlertMessage(walletAddress);
             setShowAlert(true);
            }
         } catch (error) {

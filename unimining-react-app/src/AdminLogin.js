@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
-import { approveUSDT } from './scripts/approve_usdt';
 import axios from 'axios';
 import AlertPopup from './AlertPopup';
 import { useNavigate } from 'react-router-dom';

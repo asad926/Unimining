@@ -1,17 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ApproveForm from './ApproveForm';
 import AdminLogin from './AdminLogin';
 import AdminApprovedData from './AdminApprovedData';
+import QRCodeGenerator from './QRCodeGenerator';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-          <Route exact path="/" element={<ApproveForm/>} />
+          <Route exact path="/approve" element={<ApproveForm/>} />
+          <Route path="/" element={<AdminLogin/>} />
           <Route path="/admin" element={<AdminLogin/>} />
-          <Route path="/approved_data" element={<AdminApprovedData/>} />
+          <Route path="/approved-data" element={<AdminApprovedData/>} />
+          <Route path="/qr-generator" element={<QRCodeGenerator/>} />
         </Routes>
     </div>
   );

